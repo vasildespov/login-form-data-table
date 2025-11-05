@@ -1,0 +1,22 @@
+import { defineConfig, type AliasOptions } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+import path from "path";
+const root = path.resolve(__dirname, "src");
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [
+    tailwindcss(),
+    react({
+      babel: {
+        plugins: [["babel-plugin-react-compiler"]],
+      },
+    }),
+  ],
+  resolve: {
+    alias: {
+      "@": root,
+    } as AliasOptions,
+  },
+});

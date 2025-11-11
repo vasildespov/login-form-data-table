@@ -6,6 +6,5 @@ import { redirect } from "react-router";
 export const tableLoader = async ({ request }: LoaderFunctionArgs) => {
   const page = new URL(request.url).searchParams.get("page") ?? "1";
   if (!isAuthenticated()) return redirect("/");
-  const people = await getPeople(page);
-  return people;
+  return await getPeople(page);
 };

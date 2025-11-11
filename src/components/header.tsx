@@ -1,10 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { isAuthenticated, logout } from "@/services/login";
+import { logout } from "@/services/login";
 import { useNavigate } from "react-router";
 
 export const Header = () => {
   const navigate = useNavigate();
-  if (!isAuthenticated()) return null;
 
   const handleLogout = () => {
     logout();

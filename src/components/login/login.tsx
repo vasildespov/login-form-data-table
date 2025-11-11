@@ -10,15 +10,22 @@ import { useState } from "react";
 import { Form, useActionData, useNavigation } from "react-router";
 
 export const Login = () => {
-  const actionData = useActionData<typeof homeAction>();
-  const navigation = useNavigation();
-  const isSubmitting = navigation.state === "submitting";
-  const error = actionData?.errorMessage;
   const [{ username, password }, setFormFields] = useState<User>({
     username: "",
     password: "",
   });
+  const actionData = useActionData<typeof homeAction>();
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
+  const error = actionData?.errorMessage;
   const isValid = isFieldValid(username) && isFieldValid(password);
+
+  const handleOnChange = (fieldName: keyof User) => (value: string) => {
+    setFormFields((prevFields) => ({
+      ...prevFields,
+      [fieldName]: value,
+    }));
+  };
 
   return (
     <Form
@@ -28,14 +35,8 @@ export const Login = () => {
     >
       <FieldSet disabled={isSubmitting}>
         <FieldGroup>
-          <Username
-            value={username}
-            onChange={(value) => setFormFields({ password, username: value })}
-          />
-          <Password
-            value={password}
-            onChange={(value) => setFormFields({ username, password: value })}
-          />
+          <Username value={username} onChange={handleOnChange("username")} />
+          <Password value={password} onChange={handleOnChange("password")} />
         </FieldGroup>
       </FieldSet>
       <Button type="submit" disabled={isSubmitting || !isValid}>

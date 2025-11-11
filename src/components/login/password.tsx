@@ -36,7 +36,6 @@ export const Password = ({ value, onChange }: FormFieldInput) => {
         </InputGroupAddon>
         <InputGroupAddon align="inline-end">
           <InputGroupButton
-            size="icon-xs"
             className="size-fit hover:bg-transparent"
             onClick={() => setShowPassword((show) => !show)}
           >

@@ -3,16 +3,17 @@ import { Password } from "@/components/login/password";
 import { Username } from "@/components/login/username";
 import { Button } from "@/components/ui/button";
 import { FieldSet, FieldGroup, FieldError } from "@/components/ui/field";
-import type { homeAction } from "@/routes/home/action";
+import { homeAction } from "@/routes/home/action";
 import type { User } from "@/types";
 import { LoaderCircle } from "lucide-react";
 import { useState } from "react";
-import { useFetcher } from "react-router";
+import { Form, useActionData, useNavigation } from "react-router";
 
 export const Login = () => {
-  const fetcher = useFetcher<typeof homeAction>();
-  const isSubmitting = fetcher.state === "submitting";
-  const error = fetcher.data?.errorMessage;
+  const actionData = useActionData<typeof homeAction>();
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
+  const error = actionData?.errorMessage;
   const [{ username, password }, setFormFields] = useState<User>({
     username: "",
     password: "",
@@ -20,7 +21,7 @@ export const Login = () => {
   const isValid = isFieldValid(username) && isFieldValid(password);
 
   return (
-    <fetcher.Form
+    <Form
       action="/"
       method="post"
       className="flex w-full max-w-md flex-col gap-5 rounded-md p-5 shadow-xl"
@@ -41,6 +42,6 @@ export const Login = () => {
         {isSubmitting ? <LoaderCircle className="animate-spin" /> : "Login"}
       </Button>
       {error && <FieldError>{error}</FieldError>}
-    </fetcher.Form>
+    </Form>
   );
 };

@@ -5,6 +5,7 @@ import { homeAction } from "@/routes/home/action";
 import { homeLoader } from "@/routes/home/loader";
 import { RootLayout } from "@/routes/layout";
 import { tableLoader } from "@/routes/table/loader";
+import { LoaderCircle } from "lucide-react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter } from "react-router";
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
         path: "/table",
         Component: People,
         loader: tableLoader,
+        hydrateFallbackElement: <LoaderCircle className="animate-spin" />,
       },
     ],
   },

@@ -1,4 +1,4 @@
-import { Skeleton } from "@/components/people/loading";
+import { Skeleton } from "@/components/people/skeleton";
 import { Button } from "@/components/ui/button";
 import {
   Table,

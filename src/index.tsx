@@ -1,6 +1,6 @@
 import "./index.css";
 import { Login } from "@/components/login/login";
-import { People } from "@/components/people";
+import { People } from "@/components/people/people";
 import { homeAction } from "@/routes/home/action";
 import { homeLoader } from "@/routes/home/loader";
 import { RootLayout } from "@/routes/layout";
@@ -22,7 +22,11 @@ const router = createBrowserRouter([
         action: homeAction,
         Component: Login,
       },
-      { path: "/table", Component: People, loader: tableLoader },
+      {
+        path: "/table",
+        Component: People,
+        loader: tableLoader,
+      },
     ],
   },
 ]);
